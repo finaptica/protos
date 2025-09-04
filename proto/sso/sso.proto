@@ -4,9 +4,13 @@ package auth;
 
 option go_package = "finaptica.sso.v1;ssov1";
 
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/empty.proto";
+
 service Auth {
     rpc Register (RegisterRequest) returns (RegisterResponse);
     rpc Login (LoginRequest) returns (LoginResponse);
+    rpc Me (google.protobuf.Empty) returns (MeResponse);
 }
 
 message RegisterRequest {
@@ -15,7 +19,7 @@ message RegisterRequest {
 }
 
 message RegisterResponse {
-    int64 user_id = 1;
+    string user_id = 1;
 }
 
 message LoginRequest {
@@ -25,5 +29,15 @@ message LoginRequest {
 }
 
 message LoginResponse {
-    string token = 1;
+    string access_token = 1;
+    string refresh_token = 2;
+    google.protobuf.Timestamp refresh_token_expires_at = 3;
+}
+
+message MeResponse {
+    string user_id = 1;
+    string email = 2;
+    string name = 3;
+    string surname = 4;
+    string avatar_key = 5;
 }
