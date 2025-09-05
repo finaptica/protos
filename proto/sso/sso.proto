@@ -10,7 +10,8 @@ import "google/protobuf/empty.proto";
 service Auth {
     rpc Register (RegisterRequest) returns (RegisterResponse);
     rpc Login (LoginRequest) returns (LoginResponse);
-    rpc Me (google.protobuf.Empty) returns (MeResponse);
+    rpc RefreshTokens (RefreshTokenRequest) returns (LoginResponse);
+    rpc Logout (LogoutRequest) returns (google.protobuf.Empty);
 }
 
 message RegisterRequest {
@@ -34,10 +35,10 @@ message LoginResponse {
     google.protobuf.Timestamp refresh_token_expires_at = 3;
 }
 
-message MeResponse {
-    string user_id = 1;
-    string email = 2;
-    string name = 3;
-    string surname = 4;
-    string avatar_key = 5;
+message RefreshTokenRequest {
+    string refresh_token = 1;
+}
+
+message LogoutRequest {
+    string refresh_token = 1;
 }

@@ -239,31 +239,27 @@ func (x *LoginResponse) GetRefreshTokenExpiresAt() *timestamppb.Timestamp {
 	return nil
 }
 
-type MeResponse struct {
+type RefreshTokenRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	UserId        string                 `protobuf:"bytes,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	Email         string                 `protobuf:"bytes,2,opt,name=email,proto3" json:"email,omitempty"`
-	Name          string                 `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
-	Surname       string                 `protobuf:"bytes,4,opt,name=surname,proto3" json:"surname,omitempty"`
-	AvatarKey     string                 `protobuf:"bytes,5,opt,name=avatar_key,json=avatarKey,proto3" json:"avatar_key,omitempty"`
+	RefreshToken  string                 `protobuf:"bytes,1,opt,name=refresh_token,json=refreshToken,proto3" json:"refresh_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *MeResponse) Reset() {
-	*x = MeResponse{}
+func (x *RefreshTokenRequest) Reset() {
+	*x = RefreshTokenRequest{}
 	mi := &file_sso_sso_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *MeResponse) String() string {
+func (x *RefreshTokenRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*MeResponse) ProtoMessage() {}
+func (*RefreshTokenRequest) ProtoMessage() {}
 
-func (x *MeResponse) ProtoReflect() protoreflect.Message {
+func (x *RefreshTokenRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_sso_sso_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -275,42 +271,58 @@ func (x *MeResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use MeResponse.ProtoReflect.Descriptor instead.
-func (*MeResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use RefreshTokenRequest.ProtoReflect.Descriptor instead.
+func (*RefreshTokenRequest) Descriptor() ([]byte, []int) {
 	return file_sso_sso_proto_rawDescGZIP(), []int{4}
 }
 
-func (x *MeResponse) GetUserId() string {
+func (x *RefreshTokenRequest) GetRefreshToken() string {
 	if x != nil {
-		return x.UserId
+		return x.RefreshToken
 	}
 	return ""
 }
 
-func (x *MeResponse) GetEmail() string {
-	if x != nil {
-		return x.Email
-	}
-	return ""
+type LogoutRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	RefreshToken  string                 `protobuf:"bytes,1,opt,name=refresh_token,json=refreshToken,proto3" json:"refresh_token,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
-func (x *MeResponse) GetName() string {
-	if x != nil {
-		return x.Name
-	}
-	return ""
+func (x *LogoutRequest) Reset() {
+	*x = LogoutRequest{}
+	mi := &file_sso_sso_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
 }
 
-func (x *MeResponse) GetSurname() string {
-	if x != nil {
-		return x.Surname
-	}
-	return ""
+func (x *LogoutRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
 }
 
-func (x *MeResponse) GetAvatarKey() string {
+func (*LogoutRequest) ProtoMessage() {}
+
+func (x *LogoutRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_sso_sso_proto_msgTypes[5]
 	if x != nil {
-		return x.AvatarKey
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use LogoutRequest.ProtoReflect.Descriptor instead.
+func (*LogoutRequest) Descriptor() ([]byte, []int) {
+	return file_sso_sso_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *LogoutRequest) GetRefreshToken() string {
+	if x != nil {
+		return x.RefreshToken
 	}
 	return ""
 }
@@ -332,19 +344,16 @@ const file_sso_sso_proto_rawDesc = "" +
 	"\rLoginResponse\x12!\n" +
 	"\faccess_token\x18\x01 \x01(\tR\vaccessToken\x12#\n" +
 	"\rrefresh_token\x18\x02 \x01(\tR\frefreshToken\x12S\n" +
-	"\x18refresh_token_expires_at\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\x15refreshTokenExpiresAt\"\x88\x01\n" +
-	"\n" +
-	"MeResponse\x12\x17\n" +
-	"\auser_id\x18\x01 \x01(\tR\x06userId\x12\x14\n" +
-	"\x05email\x18\x02 \x01(\tR\x05email\x12\x12\n" +
-	"\x04name\x18\x03 \x01(\tR\x04name\x12\x18\n" +
-	"\asurname\x18\x04 \x01(\tR\asurname\x12\x1d\n" +
-	"\n" +
-	"avatar_key\x18\x05 \x01(\tR\tavatarKey2\xa3\x01\n" +
+	"\x18refresh_token_expires_at\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\x15refreshTokenExpiresAt\":\n" +
+	"\x13RefreshTokenRequest\x12#\n" +
+	"\rrefresh_token\x18\x01 \x01(\tR\frefreshToken\"4\n" +
+	"\rLogoutRequest\x12#\n" +
+	"\rrefresh_token\x18\x01 \x01(\tR\frefreshToken2\xeb\x01\n" +
 	"\x04Auth\x129\n" +
 	"\bRegister\x12\x15.auth.RegisterRequest\x1a\x16.auth.RegisterResponse\x120\n" +
-	"\x05Login\x12\x12.auth.LoginRequest\x1a\x13.auth.LoginResponse\x12.\n" +
-	"\x02Me\x12\x16.google.protobuf.Empty\x1a\x10.auth.MeResponseB\x18Z\x16finaptica.sso.v1;ssov1b\x06proto3"
+	"\x05Login\x12\x12.auth.LoginRequest\x1a\x13.auth.LoginResponse\x12?\n" +
+	"\rRefreshTokens\x12\x19.auth.RefreshTokenRequest\x1a\x13.auth.LoginResponse\x125\n" +
+	"\x06Logout\x12\x13.auth.LogoutRequest\x1a\x16.google.protobuf.EmptyB\x18Z\x16finaptica.sso.v1;ssov1b\x06proto3"
 
 var (
 	file_sso_sso_proto_rawDescOnce sync.Once
@@ -358,26 +367,29 @@ func file_sso_sso_proto_rawDescGZIP() []byte {
 	return file_sso_sso_proto_rawDescData
 }
 
-var file_sso_sso_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
+var file_sso_sso_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
 var file_sso_sso_proto_goTypes = []any{
 	(*RegisterRequest)(nil),       // 0: auth.RegisterRequest
 	(*RegisterResponse)(nil),      // 1: auth.RegisterResponse
 	(*LoginRequest)(nil),          // 2: auth.LoginRequest
 	(*LoginResponse)(nil),         // 3: auth.LoginResponse
-	(*MeResponse)(nil),            // 4: auth.MeResponse
-	(*timestamppb.Timestamp)(nil), // 5: google.protobuf.Timestamp
-	(*emptypb.Empty)(nil),         // 6: google.protobuf.Empty
+	(*RefreshTokenRequest)(nil),   // 4: auth.RefreshTokenRequest
+	(*LogoutRequest)(nil),         // 5: auth.LogoutRequest
+	(*timestamppb.Timestamp)(nil), // 6: google.protobuf.Timestamp
+	(*emptypb.Empty)(nil),         // 7: google.protobuf.Empty
 }
 var file_sso_sso_proto_depIdxs = []int32{
-	5, // 0: auth.LoginResponse.refresh_token_expires_at:type_name -> google.protobuf.Timestamp
+	6, // 0: auth.LoginResponse.refresh_token_expires_at:type_name -> google.protobuf.Timestamp
 	0, // 1: auth.Auth.Register:input_type -> auth.RegisterRequest
 	2, // 2: auth.Auth.Login:input_type -> auth.LoginRequest
-	6, // 3: auth.Auth.Me:input_type -> google.protobuf.Empty
-	1, // 4: auth.Auth.Register:output_type -> auth.RegisterResponse
-	3, // 5: auth.Auth.Login:output_type -> auth.LoginResponse
-	4, // 6: auth.Auth.Me:output_type -> auth.MeResponse
-	4, // [4:7] is the sub-list for method output_type
-	1, // [1:4] is the sub-list for method input_type
+	4, // 3: auth.Auth.RefreshTokens:input_type -> auth.RefreshTokenRequest
+	5, // 4: auth.Auth.Logout:input_type -> auth.LogoutRequest
+	1, // 5: auth.Auth.Register:output_type -> auth.RegisterResponse
+	3, // 6: auth.Auth.Login:output_type -> auth.LoginResponse
+	3, // 7: auth.Auth.RefreshTokens:output_type -> auth.LoginResponse
+	7, // 8: auth.Auth.Logout:output_type -> google.protobuf.Empty
+	5, // [5:9] is the sub-list for method output_type
+	1, // [1:5] is the sub-list for method input_type
 	1, // [1:1] is the sub-list for extension type_name
 	1, // [1:1] is the sub-list for extension extendee
 	0, // [0:1] is the sub-list for field type_name
@@ -394,7 +406,7 @@ func file_sso_sso_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_sso_sso_proto_rawDesc), len(file_sso_sso_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   5,
+			NumMessages:   6,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
